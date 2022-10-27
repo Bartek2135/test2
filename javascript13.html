@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+<style>
+     h1
+    {
+        text-align: center;
+        font-size: 30px;
+    }
+    
+    .rodzic
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .box
+    {
+        width: 450px;
+        height: 100%;
+        border: 6px solid rgb(33, 31, 31);
+        border-radius: 4.5%;
+        background-color: rgb(141, 137, 137);
+        color: white;
+    }
+
+    #nagłówek
+    {
+        font-size: 25px;
+    }
+    
+    #przycisk
+    {
+        cursor: pointer;
+    }
+    #lista
+    {
+        text-align: start;
+    }
+    
+    .prerodzic
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .rodzic3
+    {
+        height: 100%;
+        width: 400px;
+        border-radius: 6%;
+        border: 4px solid black;
+        background-color: gainsboro;
+        color: black;
+        text-align: start;
+        margin: 20px;
+    }
+
+    .good
+    {
+        color: lime;
+    }
+
+    /*.good2
+    {
+        color: red;
+    }*/
+    /*gainsboro;*/
+</style>
+<h1>Prosta gra</h1>
+<div class="rodzic">
+<div id="kwadrat" class="box">
+<p id="nagłówek">Zgadnij liczbę od 1 do 10</p>
+<div class="rodzic2">
+<input type="text" id="arkusz1">
+<button id="przycisk">wyślij</button>
+</div>
+<p id="kreski">---</p>
+<div class="prerodzic">
+<div class="rodzic3">
+<p class="nagłówek2">Odpowiedzi:</p>
+<ul id="lista">
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<script>
+var kreski = document.getElementById("kreski");
+var arkusz1 = document.getElementById("arkusz1");
+var przycisk = document.getElementById("przycisk");
+var arkusz2 = document.getElementById("arkusz2");
+var lista = document.getElementById("lista");
+var i = 0;
+
+var los = Math.floor(Math.random() * 10) + 1;
+//alert(los);
+
+przycisk.addEventListener("click", sprawdz);
+
+function sprawdz()
+{
+    var wartość = Number(arkusz1.value);
+    if(Number.isInteger(wartość) && wartość >= 1 && wartość <= 10)
+    {
+        i++
+        
+        if(los > wartość)
+        {
+            kreski.innerHTML = "szukana liczba jest większa od podanej";
+            //kreski.classList.add("good2");
+        }
+        else if(los < wartość)
+        {
+            kreski.innerHTML = "szukana liczba jest mniejsza od podanej";
+        }
+        else
+        {
+            kreski.innerHTML = "Brawo!! Zgadłeś za " + i + " razem";
+            kreski.classList.add("good");
+            przycisk.innerHTML = "Odśwież";
+            przycisk.removeEventListener("click", sprawdz);
+            przycisk.addEventListener("click", Odswiez);
+        }
+        //kreski.innerHTML = arkusz1.value;
+
+        var li = document.createElement("li");
+        lista.appendChild(li);
+        lista.lastChild.innerHTML = i.toString() + ":  " + wartość;
+    }
+    else
+    {
+        alert("błędna liczba");
+    }
+    
+}
+function Odswiez()
+{
+    location.reload();
+}
+
+
+</script>
+</body>
+</html>
